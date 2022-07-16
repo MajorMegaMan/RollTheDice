@@ -69,15 +69,6 @@ public class Player : MonoBehaviour
         m_smoothCam.x = Mathf.SmoothDampAngle(m_smoothCam.x, m_targetCamRotation.x, ref m_smoothCamVelocity.x, m_smoothCamTime);
         m_smoothCam.y = Mathf.SmoothDampAngle(m_smoothCam.y, m_targetCamRotation.y, ref m_smoothCamVelocity.y, m_smoothCamTime);
 
-        Vector3 camEuler = m_camTransform.localEulerAngles;
-        camEuler.x = m_smoothCam.x;
-        m_camTransform.localEulerAngles = camEuler;
-
-        Vector3 bodyEuler = transform.eulerAngles;
-        bodyEuler.y = m_smoothCam.y;
-        Quaternion rot = Quaternion.Euler(bodyEuler);
-        m_rigidBody.MoveRotation(rot);
-
         if(jumpInput && m_isGrounded)
         {
             Jump();
@@ -97,28 +88,10 @@ public class Player : MonoBehaviour
 
         movementForce = transform.localToWorldMatrix * movementForce;
 
-        AddClampForce(movementForce * m_moveForce);
-    }
-
-    void AddClampForce(Vector3 moveForce)
-    {
-        Vector3 predictedVelocity = m_rigidBody.velocity + moveForce * Time.fixedDeltaTime;
-
-        Vector3 horizontalVelocity = predictedVelocity;
-        horizontalVelocity.y = 0;
-        float horiSpeed = horizontalVelocity.magnitude;
-
-        float speedDiff = m_moveSpeed - horiSpeed;
-
-        if(speedDiff < 0.0f)
-        {
-            // Don't add Force, instead add the negataive force to ensure that the player does not exceed the speed.
-            m_rigidBody.AddForce(moveForce * speedDiff);
-        }
-        else
-        {
-            m_rigidBody.AddForce(moveForce);
-        }
+        Vector3 velocity = m_rigidBody.velocity;
+        velocity.x = movementForce.x * m_moveSpeed;
+        velocity.z = movementForce.z * m_moveSpeed;
+        m_rigidBody.velocity = velocity;
     }
 
     public bool CanJump()
@@ -159,6 +132,18 @@ public class Player : MonoBehaviour
     public void Shoot()
     {
         m_playerShoot.Shoot(m_camTransform);
+    }
+
+    public void UpdateLook()
+    {
+        Vector3 camEuler = m_camTransform.localEulerAngles;
+        camEuler.x = m_smoothCam.x;
+        m_camTransform.localEulerAngles = camEuler;
+
+        Vector3 bodyEuler = transform.eulerAngles;
+        bodyEuler.y = m_smoothCam.y;
+        Quaternion rot = Quaternion.Euler(bodyEuler);
+        m_rigidBody.MoveRotation(rot);
     }
 
     private void OnCollisionEnter(Collision collision)
