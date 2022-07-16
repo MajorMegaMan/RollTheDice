@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     Vector2 m_smoothCamVelocity = Vector2.zero;
     [SerializeField] float m_smoothCamTime = 0.1f;
 
+    [SerializeField] PlayerShoot m_playerShoot;
+    [SerializeField] string m_enemyTag = "Enemy";
+
     private void Awake()
     {
         m_rigidBody = GetComponent<Rigidbody>();
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
         mouseDelta.y = Input.GetAxis("Mouse Y");
 
         bool jumpInput = Input.GetAxisRaw("Jump") > 0.0f;
+        bool shootInput = Input.GetAxisRaw("Fire1") > 0.0f;
 
         m_targetCamRotation.x -= mouseDelta.y * m_cameraSensitivity;
         m_targetCamRotation.y += mouseDelta.x * m_cameraSensitivity;
@@ -77,6 +81,11 @@ public class Player : MonoBehaviour
         if(jumpInput && m_isGrounded)
         {
             Jump();
+        }
+
+        if(shootInput)
+        {
+            Shoot();
         }
     }
 
@@ -145,6 +154,11 @@ public class Player : MonoBehaviour
     public void ExitGround()
     {
         m_isGrounded = false;
+    }
+
+    public void Shoot()
+    {
+        m_playerShoot.Shoot(m_camTransform);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6494583282876822440}
   - component: {fileID: 6494583282876822441}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: InnerCollider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6494583283954380751}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6494583282876822441
 CapsuleCollider:
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 6494583282924235736}
   - component: {fileID: 6494583282924235738}
   - component: {fileID: 6494583282924235737}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6494583283954380751}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6494583282924235738
 MeshFilter:
@@ -129,52 +129,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6494583283420351187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6494583283420351196}
-  - component: {fileID: 6494583283420351197}
-  m_Layer: 0
-  m_Name: OuterCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6494583283420351196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494583283420351187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6494583283954380751}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6494583283420351197
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494583283420351187}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6494583283812442425
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,9 +144,10 @@ GameObject:
   - component: {fileID: 6494583283812442405}
   - component: {fileID: 6494583283812442404}
   - component: {fileID: 1811148992661746751}
-  m_Layer: 0
+  - component: {fileID: 2809886308944440955}
+  m_Layer: 16
   m_Name: TestAgent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +235,19 @@ MonoBehaviour:
   destroyOnDeath: 0
   onDeathEvents:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6494583283812442404}
+        m_TargetAssemblyTypeName: AIAgent, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6494583283812442405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +279,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 5df2039307825ae4696ba957866f9699, type: 2}
   anim: {fileID: 6494583283954380744}
   attack: {fileID: 1811148992661746751}
-  charCollider: {fileID: 6494583283420351197}
+  charCollider: {fileID: 2809886308944440955}
   innerCollider: {fileID: 6494583282876822441}
   agentAudio: {fileID: 6494583283954380745}
   agentRenderers: []
@@ -337,6 +304,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armAttack: {fileID: 6494583284826128627}
+--- !u!136 &2809886308944440955
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494583283812442425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6494583283954380750
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +330,7 @@ GameObject:
   - component: {fileID: 6494583283954380744}
   - component: {fileID: 6494583283954380745}
   - component: {fileID: 6494583283954380746}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Needed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +350,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6494583284826128626}
-  - {fileID: 6494583283420351196}
   - {fileID: 6494583282876822440}
   - {fileID: 6494583282924235736}
   m_Father: {fileID: 6494583283812442427}
@@ -519,7 +499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6494583284826128626}
   - component: {fileID: 6494583284826128627}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MeleeHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
