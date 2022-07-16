@@ -95,7 +95,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6494583283812442425}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -249,6 +249,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_modelTransform: {fileID: 1837411148392953666}
+  m_localOffset: {x: 0, y: 1, z: 0}
+  m_smoothTime: 0.1
+  m_wiggle:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.084745765
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_wiggleTime: 1
 --- !u!1 &6494583283954380750
 GameObject:
   m_ObjectHideFlags: 0

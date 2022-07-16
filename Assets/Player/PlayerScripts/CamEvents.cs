@@ -22,11 +22,7 @@ public class CamEvents : MonoBehaviour
 
     void OnBeginCameraRendering(ScriptableRenderContext context, Camera camera)
     {
-        // Put the code that you want to execute before the camera renders here
-        // If you are using URP or HDRP, Unity calls this method automatically
-        // If you are writing a custom SRP, you must call RenderPipeline.BeginCameraRendering
         m_preRender.Invoke();
-        Debug.Log("Cam Render");
     }
 
     private void OnEnable()
