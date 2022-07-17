@@ -287,9 +287,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 6494583283954380746}
   idleClip: {fileID: 0}
-  attackClip: {fileID: 0}
-  hurtClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 33b254c7c6a9bd544942d22f9324246a, type: 3}
+  hurtClip: {fileID: 8300000, guid: c9fcdbd8bb5bb9c42981a9ba28089d98, type: 3}
+  deathClip: {fileID: 8300000, guid: 9ac9e455e130968459fc7ff35a33428c, type: 3}
   footClip: {fileID: 0}
 --- !u!82 &6494583283954380746
 AudioSource:
@@ -300,7 +300,8 @@ AudioSource:
   m_GameObject: {fileID: 6494583283954380750}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6274467990426430117, guid: ff2d7b39b6646644888b53098a9548d2,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -347,7 +348,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

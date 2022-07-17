@@ -30,6 +30,11 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale == 0.0f)
+        {
+            return;
+        }
+
         Vector2 mouseDelta = Vector2.zero;
         mouseDelta.x = Input.GetAxis("Mouse X");
         mouseDelta.y = Input.GetAxis("Mouse Y");
