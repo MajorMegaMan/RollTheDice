@@ -108,7 +108,10 @@ public class PlayerShoot : MonoBehaviour
                 else if(hitInfo.collider.CompareTag(m_objectiveDieTag))
                 {
                     var die = hitInfo.collider.GetComponent<ObjectiveDie>();
-                    die.Roll(hitInfo.point, source.forward * m_weapon.physicsForce);
+                    if(die.Roll(hitInfo.point, source.forward * m_weapon.physicsForce))
+                    {
+
+                    }
                 }
                 else
                 {
