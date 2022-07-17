@@ -50,3 +50,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_bloomCooldownSpeed: 0.2
+  m_bloomCooldownRate: 5
+  m_bloomAddPerShot: 0.1
+  m_minReticleSize: 0.2
+  m_maxReticleSize: 0.7
