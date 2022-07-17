@@ -16,7 +16,8 @@ namespace AIStates
         falling,
 
         // Debug States
-        debugAlwaysAttack
+        debugAlwaysAttack,
+        debugAttackCooldown
     }
 
     public static class StateBucket
@@ -34,6 +35,7 @@ namespace AIStates
 
             // Debug States
             target.AddState(new AlwaysAttackPlayer());
+            target.AddState(new ChargeAlwaysAttackPlayer());
         }
     }
 
@@ -611,7 +613,7 @@ namespace AIStates
             // check if the agent is still attacking
             if (!agent.anim.GetBool("isAttacking"))
             {
-                agent.ChangeState(StateIndex.debugAlwaysAttack);
+                agent.ChangeState(StateIndex.debugAttackCooldown);
                 return;
             }
         }
@@ -627,6 +629,36 @@ namespace AIStates
             agent.attack.AttackExit();
 
             agent.navAgent.nextPosition = agent.transform.position;
+        }
+    }
+
+    public class ChargeAlwaysAttackPlayer : AgentState
+    {
+        public override void Enter(AIAgent agent)
+        {
+
+        }
+
+        public override void Update(AIAgent agent)
+        {
+            if (agent.distToPlayerSquared < agent.settings.attackChargeRadius * agent.settings.attackChargeRadius)
+            {
+                // in range to charge attack
+                agent.attackCharge += Time.deltaTime * agent.settings.attackChargeRate;
+
+                if (agent.attackCharge > agent.settings.attackChargeMax)
+                {
+                    agent.attackCharge -= agent.settings.attackChargeMax;
+                    // The agent has successfully begun it's attack
+                    agent.ChangeState(StateIndex.debugAlwaysAttack);
+                    return;
+                }
+            }
+        }
+
+        public override void Exit(AIAgent agent)
+        {
+
         }
     }
 }

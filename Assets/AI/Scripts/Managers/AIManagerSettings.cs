@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Serialisable;
 
 [CreateAssetMenu(menuName = "AI/Scriptables/AIManagerSettings")]
 public class AIManagerSettings : ScriptableObject
@@ -13,14 +14,15 @@ public class AIManagerSettings : ScriptableObject
         public string containerName;
     }
 
-    public EnemyInfo[] enemies = new EnemyInfo[1];
+    [SerializeField] SerialisedDictionary<EnemyType, EnemyInfo> m_enemies = new SerialisedDictionary<EnemyType, EnemyInfo>();
 
-    public List<AgentObjectPool> CreateObjectPools(AIManager aiManager)
+    public Dictionary<EnemyType, AgentObjectPool> CreateObjectPools(AIManager aiManager)
     {
-        List<AgentObjectPool> enemyPoolList = new List<AgentObjectPool>();
-        foreach(EnemyInfo enemyInfo in enemies)
+        Dictionary<EnemyType, AgentObjectPool> enemyPoolList = new Dictionary<EnemyType, AgentObjectPool>();
+        Dictionary<EnemyType, EnemyInfo> enemyDict = m_enemies.GetDictionary();
+        foreach(var enemyInfoPair in enemyDict)
         {
-            enemyPoolList.Add(CreatePool(aiManager, enemyInfo));
+            enemyPoolList.Add(enemyInfoPair.Key, CreatePool(aiManager, enemyInfoPair.Value));
         }
         return enemyPoolList;
     }
@@ -33,20 +35,19 @@ public class AIManagerSettings : ScriptableObject
         return enemyPool;
     }
 
+    public EnemyType GetEnemyTypeMask()
+    {
+        EnemyType result = 0;
+        Dictionary<EnemyType, EnemyInfo> enemyDict = m_enemies.GetDictionary();
+        foreach (var enemyInfoPair in enemyDict)
+        {
+            result = result | enemyInfoPair.Key;
+        }
+        return result;
+    }
+
     private void OnValidate()
     {
-        if(enemies.Length == 0)
-        {
-            enemies = new EnemyInfo[1];
-            Debug.LogWarning("There needs to be at least one enemy type");
-        }
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if(enemies[i].maxCount < 1)
-            {
-                enemies[i].maxCount = 1;
-            }
-        }
+        
     }
 }
