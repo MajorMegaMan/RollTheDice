@@ -4,41 +4,97 @@ using UnityEngine;
 
 public class DiceRoll : MonoBehaviour
 {
-    [SerializeField] Transform m_targetBounds;
-    [SerializeField] Vector3 m_boundsSize = new Vector3(10.0f, 0.0f, 10.0f);
-
     Rigidbody m_rigidbody;
 
-    [SerializeField] Vector3 m_initalForce = Vector3.zero;
+    [SerializeField] float m_rollForce = 1.0f;
 
     [SerializeField] bool debugRoll = false;
+
+    Vector3 m_lookDir = Vector3.zero;
+
+    bool m_isRolling = false;
+
+    [SerializeField] float m_rollTime = 0.5f;
+
+    float m_rollTimer = 0.0f;
 
     // Start is called before the first frame update
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
-        AddForce(m_initalForce);
+        Roll();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void AddForce(Vector3 force)
-    {
-        m_rigidbody.AddForce(force, ForceMode.Impulse);
+        if (!m_isRolling)
+        {
+            m_rigidbody.angularVelocity = Vector3.Lerp(m_rigidbody.angularVelocity, Vector3.zero, 0.1f);
+            transform.forward = Vector3.Slerp(transform.forward, m_lookDir, 0.1f);
+        }
+        else
+        {
+            m_rollTimer += Time.deltaTime;
+            if(m_rollTimer > m_rollTime)
+            {
+                int rand = Random.Range(0, 5);
+                switch(rand)
+                {
+                    case 0:
+                        {
+                            StopRolling(Vector3.up);
+                            break;
+                        }
+                    case 1:
+                        {
+                            StopRolling(Vector3.right);
+                            break;
+                        }
+                    case 2:
+                        {
+                            StopRolling(Vector3.forward);
+                            break;
+                        }
+                    case 3:
+                        {
+                            StopRolling(-Vector3.up);
+                            break;
+                        }
+                    case 4:
+                        {
+                            StopRolling(-Vector3.right);
+                            break;
+                        }
+                    case 5:
+                        {
+                            StopRolling(-Vector3.forward);
+                            break;
+                        }
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        Vector3 position = transform.position - m_targetBounds.position - m_boundsSize;
-        position.x = Mathf.Repeat(position.x, m_boundsSize.x * 2);
-        position.z = Mathf.Repeat(position.z, m_boundsSize.z * 2);
 
-        position += m_targetBounds.position - m_boundsSize;
-        transform.position = position;
+    }
+
+    public void Roll()
+    {
+        Vector3 thing = Vector3.one;
+        thing.x *= (Random.value * 2) - 1;
+        thing.y *= (Random.value * 2) - 1;
+        thing.z *= (Random.value * 2) - 1;
+        m_rigidbody.AddTorque(thing * m_rollForce, ForceMode.Impulse);
+        m_isRolling = false;
+    }
+
+    public void StopRolling(Vector3 lookDir)
+    {
+        m_lookDir = lookDir;
+        m_isRolling = true;
     }
 
     private void OnValidate()
@@ -48,19 +104,8 @@ public class DiceRoll : MonoBehaviour
             if(debugRoll)
             {
                 debugRoll = false;
-                AddForce(m_initalForce);
+                Roll();
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 position = transform.position - m_targetBounds.position - m_boundsSize;
-        position.x = Mathf.Repeat(position.x, m_boundsSize.x * 2);
-        position.z = Mathf.Repeat(position.z, m_boundsSize.z * 2);
-
-        position += m_targetBounds.position - m_boundsSize;
-
-        Gizmos.DrawCube(position, transform.localScale);
     }
 }
