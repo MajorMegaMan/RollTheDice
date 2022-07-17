@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b845a5d0c7c894786b8af638f754fc, type: 3}
-  m_Name: DebugShotgun
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  m_weaponName: Shotty
-  m_damage: 2
-  m_shootFrequency: 0.8
-  m_bulletsPerShot: 13
-  m_clipSize: 2
-  m_bloomAngle: 10
+  m_weaponName: Pistol
+  m_damage: 15
+  m_shootFrequency: 0.2
+  m_bulletsPerShot: 1
+  m_clipSize: 12
+  m_physicsForce: 3
+  m_bloomAngle: 5
   m_bloomstrength:
     serializedVersion: 2
     m_Curve:
@@ -31,17 +32,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9903891
-      value: 0.6576018
-      inSlope: 2.3004858
-      outSlope: 2.3004858
+      time: 0.634783
+      value: 0.35100693
+      inSlope: 0.873148
+      outSlope: 0.873148
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.028801505
+      inWeight: 0.04331615
       outWeight: 0.16103105
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 1.0291748
+      value: 0.7547188
       inSlope: 2.5186744
       outSlope: 2
       tangentMode: 1
@@ -51,8 +52,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_bloomCooldownSpeed: 1
-  m_bloomCooldownRate: 1
-  m_bloomAddPerShot: 0.8
-  m_minReticleSize: 0.6
+  m_bloomCooldownSpeed: 0.2
+  m_bloomCooldownRate: 5
+  m_bloomAddPerShot: 0.1
+  m_minReticleSize: 0.2
   m_maxReticleSize: 1
