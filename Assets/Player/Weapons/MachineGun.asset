@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b845a5d0c7c894786b8af638f754fc, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  m_weaponName: Machine Gun
+  m_weaponName: Ratatata
   m_damage: 3
   m_shootFrequency: 0.1
   m_bulletsPerShot: 2

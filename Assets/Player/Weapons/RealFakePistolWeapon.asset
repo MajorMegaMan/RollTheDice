@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b845a5d0c7c894786b8af638f754fc, type: 3}
   m_Name: RealFakePistolWeapon
   m_EditorClassIdentifier: 
-  m_weaponName: RealFakePistol
+  m_weaponName: Glockie
   m_damage: 5
   m_shootFrequency: 0.2
   m_bulletsPerShot: 1
+  m_clipSize: 6
+  m_physicsForce: 3
   m_bloomAngle: 10
   m_bloomstrength:
     serializedVersion: 2
