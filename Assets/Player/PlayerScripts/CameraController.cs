@@ -39,6 +39,8 @@ public class CameraController : MonoBehaviour
         m_targetCamRotation.x -= mouseDelta.y * m_cameraSensitivity;
         m_targetCamRotation.y += mouseDelta.x * m_cameraSensitivity;
 
+        m_targetCamRotation.x = Mathf.Clamp(m_targetCamRotation.x, -89.0f, 89.0f);
+
         m_smoothCam.x = Mathf.SmoothDampAngle(m_smoothCam.x, m_targetCamRotation.x, ref m_smoothCamVelocity.x, m_smoothCamTime);
         m_smoothCam.y = Mathf.SmoothDampAngle(m_smoothCam.y, m_targetCamRotation.y, ref m_smoothCamVelocity.y, m_smoothCamTime);
 

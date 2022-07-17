@@ -32,7 +32,7 @@ MonoBehaviour:
   attackDamage: 10
   rotationLerpSpeed: 0.1
   afterAttackLerpSpeed: 0.01
-  bodyDecayTime: 5
+  bodyDecayTime: 0
   dissolveShaderEffect: 
   dissolveTime: 1
   moveAnimSpeed:
