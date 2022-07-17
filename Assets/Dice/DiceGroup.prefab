@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 2185338911818797957}
   m_Layer: 0
   m_Name: DiceGroup
-  m_TagString: Untagged
+  m_TagString: ObjectiveDie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,6 +300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 200217925769165546, guid: b165924ca1e4b7b43baa02355e573d99,
+        type: 3}
+      propertyPath: m_TagString
+      value: ObjectiveDie
       objectReference: {fileID: 0}
     - target: {fileID: 688067264692527184, guid: b165924ca1e4b7b43baa02355e573d99,
         type: 3}
