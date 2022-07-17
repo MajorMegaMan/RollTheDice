@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b845a5d0c7c894786b8af638f754fc, type: 3}
-  m_Name: gun2
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  m_weaponName: gun2
+  m_weaponName: Shotty
   m_damage: 5
-  m_shootFrequency: 0.2
-  m_bulletsPerShot: 1
+  m_shootFrequency: 0.35
+  m_bulletsPerShot: 12
   m_clipSize: 6
-  m_bloomAngle: 10
+  m_physicsForce: 3
+  m_bloomAngle: 8
   m_bloomstrength:
     serializedVersion: 2
     m_Curve:
@@ -31,28 +32,37 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.6556113
-      value: 0.47365707
-      inSlope: 0.873148
-      outSlope: 0.873148
+      time: 0.0822165
+      value: 0.38029772
+      inSlope: 1.035838
+      outSlope: 1.035838
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04331615
-      outWeight: 0.16103105
+      inWeight: 0.028801505
+      outWeight: 1
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2.5186744
+      time: 0.52688134
+      value: 0.6946131
+      inSlope: 1.0644994
+      outSlope: 1.0644994
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9458313
+      value: 0.86320496
+      inSlope: -0.041686933
       outSlope: 2
       tangentMode: 1
       weightedMode: 0
-      inWeight: 0.049917478
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_bloomCooldownSpeed: 0.2
-  m_bloomCooldownRate: 5
-  m_bloomAddPerShot: 0.1
-  m_minReticleSize: 0.2
-  m_maxReticleSize: 0.7
+  m_bloomCooldownSpeed: 1
+  m_bloomCooldownRate: 1
+  m_bloomAddPerShot: 0.8
+  m_minReticleSize: 0.6
+  m_maxReticleSize: 1
