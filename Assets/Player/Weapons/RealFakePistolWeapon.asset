@@ -57,3 +57,4 @@ MonoBehaviour:
   m_bloomAddPerShot: 0.1
   m_minReticleSize: 0.2
   m_maxReticleSize: 0.7
+  m_shotSound: {fileID: 8300000, guid: f763be9a47d10394f903a374b32542c3, type: 3}

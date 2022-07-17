@@ -9,6 +9,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] string m_objectiveDieTag = "ObjectiveDie";
     [SerializeField] Weapondecal m_decalPrefab;
     [SerializeField] PlayerHUD m_playerHUD = null;
+    [SerializeField] AudioSource m_audiosource;
 
     [SerializeField] List<Weapon> m_weaponArray;
     int m_currentWeaponIndex = 0;
@@ -26,9 +27,12 @@ public class PlayerShoot : MonoBehaviour
 
     int m_clipCount = 0;
 
+    float m_initalPitch = 1.0f;
+
     private void Start()
     {
         SetWeapon(m_weapon);
+        m_initalPitch = m_audiosource.pitch;
     }
 
     public void SetWeapon(Weapon weapon)
@@ -89,6 +93,10 @@ public class PlayerShoot : MonoBehaviour
 
         m_clipCount--;
         m_playerHUD.SetClipCount(m_clipCount);
+
+        float rand = ((Random.value * 2) - 1);
+        m_audiosource.pitch = m_initalPitch + rand * 0.1f;
+        m_audiosource.PlayOneShot(m_weapon.shotSound);
 
         bool hitResult = m_weapon.ShootWeapon(source, m_hitInfoList, m_targetLayer, m_recoilBloom);
         m_recoilBloom += m_weapon.bloomAddPerShot;

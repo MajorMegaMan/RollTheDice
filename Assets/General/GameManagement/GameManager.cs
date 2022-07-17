@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Health m_playerHealth;
+    [SerializeField] TMP_Text m_playerHealthText;
+
 
     [SerializeField] EnemySpawner m_spawner;
     [SerializeField] SpawnSettings m_dynamicSettings;
@@ -31,6 +34,12 @@ public class GameManager : MonoBehaviour
     public void HealPlayer(int amount)
     {
         m_playerHealth.Heal(amount);
+        UpdateHealthText();
+    }
+
+    public void UpdateHealthText()
+    {
+        m_playerHealthText.text = m_playerHealth.health.ToString();
     }
 
     void CopySettings()

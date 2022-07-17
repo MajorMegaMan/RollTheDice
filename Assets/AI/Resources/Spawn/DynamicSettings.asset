@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a049dc0527d8944ca539d4146f28e69, type: 3}
-  m_Name: DefaultSpawnSettings 1
+  m_Name: DynamicSettings
   m_EditorClassIdentifier: 
   desiredWaveCount: 5
   maximumEnemyPopulation: 5

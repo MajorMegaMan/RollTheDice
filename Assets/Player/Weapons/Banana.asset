@@ -17,6 +17,7 @@ MonoBehaviour:
   m_shootFrequency: 1
   m_bulletsPerShot: 1
   m_clipSize: 1
+  m_physicsForce: 3
   m_bloomAngle: 10
   m_bloomstrength:
     serializedVersion: 2
@@ -56,3 +57,4 @@ MonoBehaviour:
   m_bloomAddPerShot: 0.1
   m_minReticleSize: 0.3
   m_maxReticleSize: 1
+  m_shotSound: {fileID: 8300000, guid: 91d2dad807d807a4bb1c790592ddac25, type: 3}

@@ -34,6 +34,9 @@ public class Weapon : ScriptableObject
     [SerializeField, Range(0.0f, 1.0f)] float m_minReticleSize = 0.2f;
     [SerializeField, Range(0.0f, 1.0f)] float m_maxReticleSize = 1.0f;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip m_shotSound;
+
     public string weaponName { get { return m_weaponName; } }
     public float damage { get { return m_damage; } }
     public float shootFrequency { get { return m_shootFrequency; } }
@@ -49,6 +52,8 @@ public class Weapon : ScriptableObject
     public float bloomAddPerShot { get { return m_bloomAddPerShot; } }
     public float minReticleSize { get { return m_minReticleSize; } }
     public float maxReticleSize { get { return m_maxReticleSize; } }
+
+    public AudioClip shotSound { get { return m_shotSound; } }
 
     public bool ShootWeapon(Transform source, List<RaycastHit> hitInfoList, LayerMask targetLayer, float recoilBloom)
     {
