@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RocketManTurret_Overrides
+  m_Controller: {fileID: 9100000, guid: bce52997b0c829246b0ff23d33309116, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 4671965347591553375, guid: 99c85589036d8e741bfd38095583dfde,
+      type: 3}
+    m_OverrideClip: {fileID: 4671965347591553375, guid: 04076f9dcd5beb0468db26e720d819c5,
+      type: 3}
+  - m_OriginalClip: {fileID: -7543264943670902999, guid: 99c85589036d8e741bfd38095583dfde,
+      type: 3}
+    m_OverrideClip: {fileID: -7543264943670902999, guid: 04076f9dcd5beb0468db26e720d819c5,
+      type: 3}
+  - m_OriginalClip: {fileID: 1057407186986888190, guid: 99c85589036d8e741bfd38095583dfde,
+      type: 3}
+    m_OverrideClip: {fileID: 1057407186986888190, guid: 04076f9dcd5beb0468db26e720d819c5,
+      type: 3}
