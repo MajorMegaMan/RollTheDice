@@ -6,10 +6,12 @@ public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] Weapon m_weapon = null;
     [SerializeField] LayerMask m_targetLayer = ~0;
+    [SerializeField] string m_objectiveDieTag = "ObjectiveDie";
     [SerializeField] Weapondecal m_decalPrefab;
     [SerializeField] PlayerHUD m_playerHUD = null;
 
     [SerializeField] List<Weapon> m_weaponArray;
+    int m_currentWeaponIndex = 0;
 
     bool m_canShoot = true;
 
@@ -75,15 +77,16 @@ public class PlayerShoot : MonoBehaviour
             return;
         }
 
-        if(m_clipCount == 0)
+        m_canShoot = false;
+        m_shootTimer = 0.0f;
+
+        if (m_clipCount == 0)
         {
             // Trigger Roll Reload
             RollReload();
             return;
         }
 
-        m_canShoot = false;
-        m_shootTimer = 0.0f;
         m_clipCount--;
         m_playerHUD.SetClipCount(m_clipCount);
 
@@ -102,12 +105,23 @@ public class PlayerShoot : MonoBehaviour
                     Health enemyHealth = hitInfo.collider.gameObject.GetComponent<Health>();
                     DamageHealth(enemyHealth, hitInfo.collider);
                 }
+                else if(hitInfo.collider.CompareTag(m_objectiveDieTag))
+                {
+                    var die = hitInfo.collider.GetComponent<ObjectiveDie>();
+                    die.Roll(hitInfo.point, source.forward * m_weapon.physicsForce);
+                }
                 else
                 {
                     CreateDecal(source.forward, hitInfo.point);
                 }
             }
         }
+    }
+
+    // returns true if target layer matches one of include layer
+    bool CompareLayers(LayerMask targetLayer, LayerMask includeLayer)
+    {
+        return ((1 << targetLayer) & includeLayer) != 0;
     }
 
     public void DamageHealth(Health health, Collider targetCollider)
@@ -125,6 +139,7 @@ public class PlayerShoot : MonoBehaviour
     public void RollReload()
     {
         int value = Random.Range(0, 5);
+        m_currentWeaponIndex = value % m_weaponArray.Count;
         SetWeapon(m_weaponArray[value % m_weaponArray.Count]);
     }
 
