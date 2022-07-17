@@ -15,6 +15,8 @@ public class Weapon : ScriptableObject
     [SerializeField] int m_bulletsPerShot = 1;
     [SerializeField] int m_clipSize = 6;
 
+    [SerializeField] float m_physicsForce = 3.0f;
+
     [Header("Bloom")]
     [SerializeField] float m_bloomAngle = 1.0f;
 
@@ -37,6 +39,8 @@ public class Weapon : ScriptableObject
     public float shootFrequency { get { return m_shootFrequency; } }
     public int bulletsPerShot { get { return m_bulletsPerShot; } }
     public int clipSize { get { return m_clipSize; } }
+
+    public float physicsForce { get { return m_physicsForce; } }
 
     public float bloomAngle { get { return m_bloomAngle; } }
     public AnimationCurve bloomstrength { get { return m_bloomstrength; } }
