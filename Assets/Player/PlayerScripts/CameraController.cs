@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform m_camTransform = null;
-    [SerializeField] float m_cameraSensitivity = 100.0f;
+    public float m_cameraSensitivity = 100.0f;
     // This is pitch for x, and yaw for y, measured in degrees
     Vector2 m_targetCamRotation = Vector2.zero;
 
@@ -16,9 +16,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] PlayerShoot m_playerShoot;
     [SerializeField] string m_enemyTag = "Enemy";
 
+    float m_initialYRotation = 0.0f;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        m_initialYRotation = transform.eulerAngles.y;
     }
 
     // Start is called before the first frame update
@@ -47,7 +50,7 @@ public class CameraController : MonoBehaviour
         m_targetCamRotation.x = Mathf.Clamp(m_targetCamRotation.x, -89.0f, 89.0f);
 
         m_smoothCam.x = Mathf.SmoothDampAngle(m_smoothCam.x, m_targetCamRotation.x, ref m_smoothCamVelocity.x, m_smoothCamTime);
-        m_smoothCam.y = Mathf.SmoothDampAngle(m_smoothCam.y, m_targetCamRotation.y, ref m_smoothCamVelocity.y, m_smoothCamTime);
+        m_smoothCam.y = Mathf.SmoothDampAngle(m_smoothCam.y, m_targetCamRotation.y + m_initialYRotation, ref m_smoothCamVelocity.y, m_smoothCamTime);
 
         if(shootInput)
         {
