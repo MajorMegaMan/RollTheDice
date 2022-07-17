@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPush : MonoBehaviour
 {
-    public Player player;
+    public PlayerController player;
 
     public float pushStrength = 5.0f;
     public float pushSmoothTime = 0.1f;
