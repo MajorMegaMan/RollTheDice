@@ -1,21 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ObjectiveDie : MonoBehaviour
 {
     Rigidbody m_rigidbody;
 
-    [SerializeField] Vector3 m_initalForce = Vector3.zero;
+    [SerializeField] UnityEvent m_firstRollEvent;
 
-    [SerializeField] bool debugRoll = false;
+    [SerializeField] Vector3 m_initalForce = Vector3.zero;
+    [SerializeField] float m_maxRestingSpeed = 0.2f;
+
+    // The time it takes for the dice to be considered resting
+    [SerializeField] float m_restTime = 2.0f;
+
+    float m_restTimer = 0.0f;
+
+    bool m_isResting = false;
+
+    [SerializeField] UnityEvent m_enterRestEvent;
 
     List<float> m_dotSides;
+
+    [SerializeField] bool debugRoll = false;
 
     // How many times is the player aloowed to "Roll" the dice
     [SerializeField] int m_availableTouchCount = 5;
     int m_touchCount = 0;
+
+    // These dice will also roll when this is rolled.
+    [SerializeField] List<ObjectiveDie> m_buddyDice;
 
     private void Awake()
     {
@@ -27,6 +43,39 @@ public class ObjectiveDie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitFloating(transform.position);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(m_isResting)
+        {
+            return;
+        }
+
+        if(m_rigidbody.useGravity)
+        {
+            if(m_rigidbody.angularVelocity.magnitude < m_maxRestingSpeed)
+            {
+                m_restTimer += Time.deltaTime;
+                if (m_restTimer > m_restTime)
+                {
+                    EnterRest();
+                }
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+    public void InitFloating(Vector3 position)
+    {
+        Float();
+
         Vector3 randomDir = Vector3.zero;
         randomDir.x = (Random.value * 2) - 1;
         randomDir.y = (Random.value * 2) - 1;
@@ -39,32 +88,44 @@ public class ObjectiveDie : MonoBehaviour
         m_rigidbody.AddTorque(randomDir, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        
-    }
-
     public void Float()
     {
+        m_isResting = false;
         m_rigidbody.useGravity = false;
     }
 
-    public void Roll(Vector3 force)
+    void EnterRest()
     {
-        m_rigidbody.useGravity = true;
-        m_rigidbody.AddTorque(force, ForceMode.Impulse);
-        m_rigidbody.AddForce(force, ForceMode.Impulse);
-        m_touchCount++;
+        m_touchCount = m_availableTouchCount;
+        m_enterRestEvent.Invoke();
     }
 
-    public void Roll(Vector3 hitPoint, Vector3 force)
+    // Returns true if the die was rolled.
+    public bool Roll(Vector3 hitPoint, Vector3 force)
     {
+        if(SelfishRoll(hitPoint, force))
+        {
+            for(int i = 0; i < m_buddyDice.Count; i++)
+            {
+                m_buddyDice[i].SelfishRoll(hitPoint, force);
+            }
+        }
+        return false;
+    }
+
+    // Returns true if the die was rolled.
+    bool SelfishRoll(Vector3 hitPoint, Vector3 force)
+    {
+        if (m_touchCount >= m_availableTouchCount)
+        {
+            return false;
+        }
+
+        if (m_rigidbody.useGravity)
+        {
+            m_firstRollEvent.Invoke();
+        }
+
         m_rigidbody.useGravity = true;
 
         // Too much force added. But whatevs.
@@ -72,6 +133,8 @@ public class ObjectiveDie : MonoBehaviour
         m_rigidbody.AddForce(force, ForceMode.Impulse);
         m_rigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
         m_touchCount++;
+
+        return true;
     }
 
     public int GetUpSideIndex()
@@ -104,7 +167,7 @@ public class ObjectiveDie : MonoBehaviour
             if (debugRoll)
             {
                 debugRoll = false;
-                Roll(m_initalForce);
+                Roll(transform.position, m_initalForce);
             }
         }
     }

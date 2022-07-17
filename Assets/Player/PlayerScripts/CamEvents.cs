@@ -8,6 +8,8 @@ public class CamEvents : MonoBehaviour
 {
     [SerializeField] UnityEvent m_preRender;
 
+    public UnityEvent onPreRenderEvent { get { return m_preRender; } }
+
     // Start is called before the first frame update
     void Start()
     {
