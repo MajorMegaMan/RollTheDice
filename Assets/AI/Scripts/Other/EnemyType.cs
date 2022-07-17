@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Flags]
 public enum EnemyType
 {
-    cultist = 1,
-    belcher = 2
+    swinger = 1,
+    charger = 2,
+    shooter = 4,
+    turret = 8
 }

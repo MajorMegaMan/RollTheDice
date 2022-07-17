@@ -60,48 +60,26 @@ public class AISettings : ScriptableObject
     public float hurtDelay = 0.1f;
     public float deathDelay = 0.1f;
 
+    void StabiliseExistingEnemyTypeObjects(EnemyType enemyType)
+    {
+        var managers = FindObjectsOfType<AIManager>();
+        foreach (var manager in managers)
+        {
+            foreach (var agent in manager.activeAgents)
+            {
+                if (agent.settings.enemyType == enemyType)
+                {
+                    agent.StabiliseSettings();
+                }
+            }
+        }
+    }
+
     private void OnValidate()
     {
         if(Application.isPlaying)
         {
-            switch (enemyType)
-            {
-                case EnemyType.cultist:
-                    {
-                        var managers = FindObjectsOfType<AIManager>();
-                        foreach (var manager in managers)
-                        {
-                            foreach(var agent in manager.activeAgents)
-                            {
-                                if(agent.settings.enemyType == EnemyType.cultist)
-                                {
-                                    agent.StabiliseSettings();
-                                }
-                            }
-                        }
-                        break;
-                    }
-                case EnemyType.belcher:
-                    {
-                        var managers = FindObjectsOfType<AIManager>();
-                        foreach (var manager in managers)
-                        {
-                            foreach (var agent in manager.activeAgents)
-                            {
-                                if (agent.settings.enemyType == EnemyType.belcher)
-                                {
-                                    agent.StabiliseSettings();
-                                }
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        Debug.Log("Pick an enemyType");
-                        break;
-                    }
-            }
+            StabiliseExistingEnemyTypeObjects(enemyType);
         }
     }
 }

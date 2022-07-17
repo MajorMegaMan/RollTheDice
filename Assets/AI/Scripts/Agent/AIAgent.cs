@@ -130,7 +130,7 @@ public class AIAgent : MonoBehaviour
 
         m_distToPlayerSquared = (playerTransform.position - transform.position).sqrMagnitude;
 
-        GetComponent<PlayerPush>().player = aiManager.playerTransform.GetComponent<Player>();// This is disgusting line but I'm lazy
+        GetComponent<PlayerPush>().player = aiManager.playerTransform.GetComponent<PlayerController>();// This is disgusting line but I'm lazy
 
         StabiliseSettings();
         ResetHealth();

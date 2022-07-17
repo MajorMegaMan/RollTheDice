@@ -25,6 +25,8 @@ public class SpawnSettings : ScriptableObject
 
     public LayerMask environmentMask = ~0;
 
+    public EnemyType randomSpawnMask = (EnemyType)~0;
+
     private void OnValidate()
     {
         if(desiredWaveCount < 0)

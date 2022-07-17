@@ -12,8 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14ed51cc6b352a4480cb1aeb1b9808b, type: 3}
   m_Name: Debug AI Manager Settings
   m_EditorClassIdentifier: 
-  enemies:
-  - targetPrefab: {fileID: 6494583283812442425, guid: c1ab46ad8e8be0040b3d970db23ec0af,
-      type: 3}
-    maxCount: 5
-    containerName: TestAgents
+  m_enemies:
+    m_keyValues:
+    - key: 1
+      value:
+        targetPrefab: {fileID: 6494583283812442425, guid: c1ab46ad8e8be0040b3d970db23ec0af,
+          type: 3}
+        maxCount: 5
+        containerName: TestAgents
+    - key: 2
+      value:
+        targetPrefab: {fileID: 6494583283812442425, guid: 7f99f7ea276ebe54ebc5ecfe61dc88b3,
+          type: 3}
+        maxCount: 5
+        containerName: TestAgents
+    - key: 4
+      value:
+        targetPrefab: {fileID: 6494583283812442425, guid: 999502e1be246b24999e91662e1fcb79,
+          type: 3}
+        maxCount: 5
+        containerName: TestAgents
+    - key: 8
+      value:
+        targetPrefab: {fileID: 6494583283812442425, guid: 77e6642010608ab42b87de2b5c791039,
+          type: 3}
+        maxCount: 5
+        containerName: TestAgents

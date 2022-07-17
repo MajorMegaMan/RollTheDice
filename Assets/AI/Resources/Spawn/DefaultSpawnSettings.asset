@@ -20,3 +20,4 @@ MonoBehaviour:
   environmentMask:
     serializedVersion: 2
     m_Bits: 852247
+  randomSpawnMask: 7
