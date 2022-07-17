@@ -20,7 +20,7 @@ public class ObjectiveDie : MonoBehaviour
 
     bool m_isResting = false;
 
-    [SerializeField] UnityEvent m_enterRestEvent;
+    [SerializeField] UnityEvent<int> m_enterRestEvent;
 
     List<float> m_dotSides;
 
@@ -85,6 +85,7 @@ public class ObjectiveDie : MonoBehaviour
         randomDir.y *= m_initalForce.y;
         randomDir.z *= m_initalForce.z;
 
+        transform.position = position;
         m_rigidbody.AddTorque(randomDir, ForceMode.Impulse);
     }
 
@@ -92,12 +93,19 @@ public class ObjectiveDie : MonoBehaviour
     {
         m_isResting = false;
         m_rigidbody.useGravity = false;
+
+        m_rigidbody.velocity = Vector3.zero;
+        m_rigidbody.angularVelocity = Vector3.zero;
+
+        m_touchCount = 0;
     }
 
     void EnterRest()
     {
         m_touchCount = m_availableTouchCount;
-        m_enterRestEvent.Invoke();
+        m_enterRestEvent.Invoke(GetUpSideIndex());
+
+        m_isResting = true;
     }
 
     // Returns true if the die was rolled.
