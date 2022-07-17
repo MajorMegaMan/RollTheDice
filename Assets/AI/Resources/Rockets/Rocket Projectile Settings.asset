@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Rocket Projectile Settings
   m_EditorClassIdentifier: 
   lifeTime: 5
-  initialForce: 5
+  initialForce: 15

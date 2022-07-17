@@ -123,18 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &113753506 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4456879949651481189, guid: 6d9cd2ac71198994f89c2b4d280d1ad1,
-    type: 3}
-  m_PrefabInstance: {fileID: 4456879949614034887}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16cf98b059e23604eb78e69613a060b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &415014591
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,77 +619,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
         type: 3}
-      propertyPath: m_weapon
-      value: 
-      objectReference: {fileID: 11400000, guid: c0b91d13050f1b64999b2fa9616086db,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_reticle
-      value: 
-      objectReference: {fileID: 113753506}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
       propertyPath: m_playerHUD
       value: 
       objectReference: {fileID: 1703611889}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_decalPrefab
-      value: 
-      objectReference: {fileID: 1567996021705281509, guid: 859399c6045b52f49ae51d882fdabfb4,
-        type: 3}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_targetLayer.m_Bits
-      value: 69633
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_objectiveDieLayer.m_Bits
-      value: 4096
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: c0b91d13050f1b64999b2fa9616086db,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 12d8edda10012e440a07ee542a47e3cb,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6c6733d8c0e32514f82f35e362ef18a2,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: ad49dc9e6272390438ee1cbd3b515f7a,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: aa3a6c4847b748a48bc2dad00ecf1562,
-        type: 2}
-    - target: {fileID: 1702105367394001435, guid: 552bb932cb36bd3448e7c8654e897372,
-        type: 3}
-      propertyPath: m_weaponArray.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 963b1dd0bb531dc4f8ac02485e1d5e7b,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552bb932cb36bd3448e7c8654e897372, type: 3}
 --- !u!1 &915975101
