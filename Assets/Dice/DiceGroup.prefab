@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4bbf61f7912554e98f22aae54c3240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_die: {fileID: 0}
+  m_die: {fileID: 2462082516223248142}
   m_dieText: {fileID: 2185338910250075593}
 --- !u!1 &2185338911818797958
 GameObject:
@@ -295,6 +295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dice
+      objectReference: {fileID: 0}
+    - target: {fileID: 200217925769165546, guid: b165924ca1e4b7b43baa02355e573d99,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 688067264692527184, guid: b165924ca1e4b7b43baa02355e573d99,
         type: 3}
@@ -375,6 +380,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8751970163438070359
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682023609957658427}
+  m_Material: {fileID: 13400000, guid: a93c647667cebda4aa0bf545183daa16, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2462082516223248142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,19 +417,6 @@ MonoBehaviour:
   debugRoll: 0
   m_availableTouchCount: 5
   m_buddyDice: []
---- !u!65 &8751970163438070359
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4682023609957658427}
-  m_Material: {fileID: 13400000, guid: a93c647667cebda4aa0bf545183daa16, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5454478200353912193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 688067264692527184, guid: b165924ca1e4b7b43baa02355e573d99,
