@@ -23,8 +23,8 @@ public class EnemySpawner : MonoBehaviour
     List<SpawnLocation> m_validOnCameraLocations = new List<SpawnLocation>();
     List<SpawnLocation> m_offCameraLocations = new List<SpawnLocation>();
 
-
-    List<AgentObjectPool> m_enemyObjectPools;
+    Dictionary<EnemyType, AgentObjectPool> m_enemyObjectPools;
+    //List<AgentObjectPool> m_enemyObjectPools;
 
     bool m_isInitialised = false;
 
@@ -77,16 +77,35 @@ public class EnemySpawner : MonoBehaviour
         m_enemyObjectPools = aiManager.enemyObjectPools;
     }
 
+    EnemyType GetRandomEnemyType()
+    {
+        EnemyType spawnMask = aiManager.enemyTypeMask & settings.randomSpawnMask;
+
+        List<EnemyType> enemyTypeKeys = new List<EnemyType>();
+        var enumValues = System.Enum.GetValues(typeof(EnemyType));
+        for (int i = 0; i < enumValues.Length; i++)
+        {
+            EnemyType enemyType = (EnemyType)enumValues.GetValue(i);
+
+            if (spawnMask.HasFlag(enemyType))
+            {
+                enemyTypeKeys.Add(enemyType);
+            }
+        }
+
+        int randIndex = Random.Range(0, enemyTypeKeys.Count);
+        return enemyTypeKeys[randIndex];
+    }
+
     AgentObjectPool GetRandomPool()
     {
         // find the target pool from aiManager
 
         // use float values to find chance of spawn
 
-        // use randomRange to find final result
-        int randIndex = Random.Range(0, m_enemyObjectPools.Count);
 
-        return m_enemyObjectPools[randIndex];
+        // use randomRange to find final result
+        return m_enemyObjectPools[GetRandomEnemyType()];
     }
 
     public bool GetEnemyAgent(out AIAgent agent)
@@ -94,20 +113,30 @@ public class EnemySpawner : MonoBehaviour
         return aiManager.SetPoolObjectActive(GetRandomPool(), out agent);
     }
 
-    public void Spawn()
+    public bool GetEnemyAgent(EnemyType enemyType, out AIAgent agent)
     {
-        if (GetEnemyAgent(out AIAgent agent))
+        return aiManager.SetPoolObjectActive(m_enemyObjectPools[enemyType], out agent);
+    }
+
+    public void Spawn(AIStates.StateIndex agentState = AIStates.StateIndex.chasePlayer)
+    {
+        Spawn(GetRandomEnemyType(), agentState);
+    }
+
+    void Spawn(EnemyType enemyType, AIStates.StateIndex agentState = AIStates.StateIndex.chasePlayer)
+    {
+        if (GetEnemyAgent(enemyType, out AIAgent agent))
         {
             // spawn will succeed
             Vector3 spawnPosition = Vector3.zero;
             SpawnLocation location = GetSpawnLocation(agent);
-            if(location == null)
+            if (location == null)
             {
                 // no available spawns some how. Likely there are no spawns around the player
                 location = FindSpawnLocationFromRoomNeighbours(agent, roomTracker.currentRoom);
             }
 
-            if(location != null)
+            if (location != null)
             {
                 location.StartSpawning();
                 spawnPosition = location.transform.position;
@@ -118,7 +147,7 @@ public class EnemySpawner : MonoBehaviour
                 spawnPosition = roomTracker.currentRoom.GetSafeSpawnPosition();
             }
 
-            SpawnEvent(agent, spawnPosition, AIStates.StateIndex.chasePlayer);
+            SpawnEvent(agent, spawnPosition, agentState);
         }
         else
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using AIStates.Manager;
+using Serialisable;
 
 public class AIManager : MonoBehaviour
 {
@@ -22,10 +22,12 @@ public class AIManager : MonoBehaviour
 
     public bool playerInTimePeriod = true;
 
-    StateMachine<AIManager> zoneStateMachine;
-    List<AgentObjectPool> m_enemyObjectPools;
+    Dictionary<EnemyType, AgentObjectPool> m_enemyObjectPools;
+    EnemyType m_enemyTypeMask = 0;
 
-    public List<AgentObjectPool> enemyObjectPools { get { return m_enemyObjectPools; } }
+    public Dictionary<EnemyType, AgentObjectPool> enemyObjectPools { get { return m_enemyObjectPools; } }
+    // enemyTypeMask is a bit flag containing the types that are found in the object pool dictionary
+    public EnemyType enemyTypeMask { get { return m_enemyTypeMask; } }
     public List<AIAgent> allAgents { get { return m_allAgents; } }
     public List<AIAgent> activeAgents { get { return GetAllActiveAgents(); } }
 
@@ -44,11 +46,7 @@ public class AIManager : MonoBehaviour
         isInitialised = true;
 
         m_enemyObjectPools = settings.CreateObjectPools(this);
-
-        zoneStateMachine = new StateMachine<AIManager>(this);
-        zoneStateMachine.AddState(new InsideZone());
-        zoneStateMachine.AddState(new OutsideZone());
-        zoneStateMachine.Init();
+        m_enemyTypeMask = settings.GetEnemyTypeMask();
 
         spawnEvent.AddListener(() => { m_aliveCount++; });
         //agentdeathEvent.AddListener(() => { m_aliveCount--; });
@@ -131,52 +129,12 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public void TogglePlayerInsideState()
-    {
-        ZoneStateIndex index = (ZoneStateIndex)zoneStateMachine.currentIndex;
-        switch(index)
-        {
-            case ZoneStateIndex.inside:
-                {
-                    ChangeZoneState(ZoneStateIndex.outside);
-                    break;
-                }
-            case ZoneStateIndex.outside:
-                {
-                    ChangeZoneState(ZoneStateIndex.inside);
-                    break;
-                }
-        }
-    }
-
-    public void ChangeZoneState(ZoneStateIndex state)
-    {
-        zoneStateMachine.ChangeState((int)state);
-    }
-
-    public void SetAgentPoolActiveInTimePeriod(bool value)
-    {
-        playerInTimePeriod = value;
-
-        foreach (AgentObjectPool enemyPool in m_enemyObjectPools)
-        {
-            foreach (EnemyPoolObject poolAgent in enemyPool.objectPool)
-            {
-                // Check if the agent should be active in it's zone
-                if (poolAgent.isActive)
-                {
-                    poolAgent.gameObject.SetActive(value);
-                }
-            }
-        }
-    }
-
     public List<AIAgent> GetAllActiveAgents()
     {
         List<AIAgent> result = new List<AIAgent>();
-        foreach (AgentObjectPool enemyPool in m_enemyObjectPools)
+        foreach (var enemyPoolPair in m_enemyObjectPools)
         {
-            foreach (AIAgent activeAgent in enemyPool.activeAgents)
+            foreach (AIAgent activeAgent in enemyPoolPair.Value.activeAgents)
             {
                 result.Add(activeAgent);
             }

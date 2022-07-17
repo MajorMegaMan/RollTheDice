@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b845a5d0c7c894786b8af638f754fc, type: 3}
   m_Name: DebugShotgun
   m_EditorClassIdentifier: 
-  m_weaponName: newWeapon
+  m_weaponName: Shotty
   m_damage: 2
   m_shootFrequency: 0.8
   m_bulletsPerShot: 13
+  m_clipSize: 2
   m_bloomAngle: 10
   m_bloomstrength:
     serializedVersion: 2
@@ -50,3 +51,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_bloomCooldownSpeed: 1
+  m_bloomCooldownRate: 1
+  m_bloomAddPerShot: 0.8
+  m_minReticleSize: 0.6
+  m_maxReticleSize: 1
